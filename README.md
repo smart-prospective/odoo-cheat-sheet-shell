@@ -124,7 +124,7 @@ log(f"The user {env.user.name} just trigger the action: X", level='info')
 Miscellaneous
 -------------
 
-To add a dynamic link into a mail template (such as a link to a contact). Create your button, then edit in code mode (such as the language) and change the href in t-att-href, then write python code into it.
+To add a dynamic link into a mail template (such as a link to a contact form). Create your button, then edit in code mode (via the language for example) and change the href in t-att-href, then write python code into it.
 ```QWeb
 <a t-att-href="'/web#id=' + str(object.id) + '&amp;cids=1&amp;menu_id=233&amp;action=346&amp;model=res.partner&amp;view_type=form'" style="color:#008f8c;text-decoration: none; box-sizing: border-box;">Link to edit your contact</a>
 ```
