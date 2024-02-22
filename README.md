@@ -29,6 +29,18 @@ To commit changes, use:
 env.cr.commit()
 ```
 
+Quick Start in Shell
+--------------------
+```python
+# Get the company of your contact (the orginal one created)
+contact = env["res.partner"].search([('id', '=', 1)])
+print(contact.name)
+# Get the 1st contact link to it (you?)
+me = contact.child_ids[0]
+print(me.name)
+# Sorry if it fail, you probably don't use the same logic in you contact as us (Contact > Contact.parent_id is the Company)
+```
+
 Get Instances & Values
 ----------------------
 
@@ -75,4 +87,44 @@ tag_name = "Client"
 tag = env['res.partner.category'].search([('name', '=', tag_name)], limit=1)
 # 3: is the code to delete an instance in M2M
 record.write({'category_id': [(3, tag.id)]})
+```
+
+Usefull Method
+--------------
+
+Few methods are really usefull to know and simple to use (just need to be aware of them ^^)
+```python
+# Add a note/message in the record and if you specify partner_ids (optionnal) (list of res.partner id) it will notify them.
+record.message_post(body=f"The action X has been applied here...", partner_ids=[user.id])
+
+# Log a message in the server (You can can find them in Odoo > Parameters > Technical (Need Developper Mode Enabled) > Logging
+log(f"This is a log about X", level='info')
+
+# Send a mail from a template (need a record, which will be used as the 'object' variable in the mail template)
+mail_template = self.env['mail.template'].search([('id', '=', 53)])
+mail_template.send_mail(record.id)
+```
+
+Usefull Fields
+--------------
+
+Few fields are not so difficult to find but only if you know where to look for.
+If you are curious, or just don't find what you look for in the following list go to: Odoo > Parameters > Technical (Need Developper Mode Enabled) > Fields > Search for what you want using filters
+```python
+# Get parent of a contact
+contact_parent = record.parent_id
+
+# Get Followers of a record (such as contact):
+followers = record.message_partner_ids
+
+# The current user who do the update of a record. Can be used in an action
+log(f"The user {env.user.name} just trigger the action: X", level='info')
+```
+
+Miscellaneous
+-------------
+
+To add a dynamic link into a mail template (such as a link to a contact). Create your button, then edit in code mode (such as the language) and change the href in t-att-href, then write python code into it.
+```QWeb
+<a t-att-href="'/web#id=' + str(object.id) + '&amp;cids=1&amp;menu_id=233&amp;action=346&amp;model=res.partner&amp;view_type=form'" style="color:#008f8c;text-decoration: none; box-sizing: border-box;">Link to edit your contact</a>
 ```
