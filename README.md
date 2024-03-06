@@ -62,6 +62,18 @@ if not tag:
   raise UserError("Tag '%s' not found. Please make sure the tag exists." % tag_name)
 ```
 
+Create a Record
+---------------
+
+To create an instance of an object (called "record"):
+```python
+# Create a contact
+env['res.partner'].create({"name": 'New Contact Name'})
+# Create a document request
+env['documents.document'].create({"name": "Document Name"})
+```
+
+
 Edit Data & Fields
 ------------------
 
