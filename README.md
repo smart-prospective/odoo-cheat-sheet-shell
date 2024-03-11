@@ -62,6 +62,15 @@ if not tag:
   raise UserError("Tag '%s' not found. Please make sure the tag exists." % tag_name)
 ```
 
+To perform a serach/query with multiple parameters (such as AND or OR):
+```python
+# Here a request with an AND
+env['product.attribute.value'].search(["&", ('name', '=', 'NC'), ('attribute_id', '=', attribute.id)], limit=1)
+# Here a request with an OR
+env['product.attribute.value'].search(["|", ('name', '=', 'NC'), ('attribute_id', '=', attribute.id)], limit=1)
+
+```
+
 Create a Record
 ---------------
 
