@@ -142,10 +142,29 @@ followers = record.message_partner_ids
 log(f"The user {env.user.name} just trigger the action: X", level='info')
 ```
 
+Usefull Model
+```python
+products = env['product.template'].search([])  # All Products
+internal_users = env['res.users'].search([])  # All Internal User (The one invited, paid profile)
+
+```
+
 Miscellaneous
 -------------
 
 To add a dynamic link into a mail template (such as a link to a contact form). Create your button, then edit in code mode (via the language for example) and change the href in t-att-href, then write python code into it.
 ```QWeb
 <a t-att-href="'/web#id=' + str(object.id) + '&amp;cids=1&amp;menu_id=233&amp;action=346&amp;model=res.partner&amp;view_type=form'" style="color:#008f8c;text-decoration: none; box-sizing: border-box;">Link to edit your contact</a>
+```
+To open a new tab with an url (computed or not) in an action
+```python
+# In this example we compute the url of a contact and on the action execution (via a <button name="ID_OF_THIS_ACTION">) we open the form view of the contact
+base_url = env['ir.config_parameter'].get_param('web.base.url')
+record_url = base_url + '/web#id=' + str(record.id) + '&view_type=form&model=' + str(model._name) + '&menu_id=436'
+
+action = {
+    'type': 'ir.actions.act_url',
+    'target': 'new',
+    'url': record_url,
+}
 ```
