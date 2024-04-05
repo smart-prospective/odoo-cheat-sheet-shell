@@ -124,6 +124,9 @@ log(f"This is a log about X", level='info')
 # Send a mail from a template (need a record, which will be used as the 'object' variable in the mail template)
 mail_template = self.env['mail.template'].search([('id', '=', 53)])
 mail_template.send_mail(record.id)
+
+# Set Datetime to Now
+record.write({"date_end": datetime.datetime.now()})
 ```
 
 Usefull Fields
