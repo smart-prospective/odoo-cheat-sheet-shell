@@ -171,6 +171,47 @@ action = {
     'url': record_url,
 }
 ```
+-------------
+To enable the viewing of the files all the time from the messages section, the file "/odoo/odoo/addons/mail/static/src/core/web/chatter.js" has to be modified:
+on line 190 : remove the "isAttachmentBoxVisibleInitially", the section should look like this :
+```javascript
+    this.state.isAttachmentBoxOpened = this.attachments.length > 0;
+}
+```
+on line 100 : replace the values of "isAttachmentBoxOpened", the value should be set to "true"
+-------------
+To remove the "Généré par Odoo" expression from mails, you should start by search for "<!-- POWERED BY -->" expression in your odoo code, sort on the .xml files, you should have all the files that will need to be changed on the platform.
+Open Odoo, than open "Vues" and "Email Templates" accessible from "Technical":
+You should now start matching each reference from the code to it's version on the server, here is an example :
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Email template for new users -->
+        <record id="set_password_email" model="mail.template">
+            <field name="name">Settings: New Portal Signup</field>
+            <field name="model_id" ref="base.model_res_users"/>
+            <field name="subject">{{ object.create_uid.name }} from {{ object.company_id.name }} invites you to connect to Odoo</field>
+                                                    ......
+                                                    ......
+                                                    ......
+</tbody>
+</table>
+</td></tr>
+<!-- POWERED BY -->
+<tr><td align="center" style="min-width: 590px;">
+    <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;">
+      <tr><td style="text-align: center; font-size: 13px;">
+        Powered by <a target="_blank" href="https://www.odoo.com?utm_source=db&amp;utm_medium=auth" style="color: #875A7B;">Odoo</a>
+      </td></tr>
+    </table>
+</td></tr>
+```
+In this example, the file is located in "data" sub directory, and the "model" is a "mail.template", so we have to find it in email templates and edit it.
+If instead you find the subdirectory to have views, and instead of model you only have "<template id="xxxxxx" name="xxxxx">" than you will need to search in vues using the "name" to find the view.
+
+And now remove the section starting by <!-- POWERED BY --> to "</td></tr>", sometimes you only need to remove only line of xml, each case is different.
 
 Server Actions
 --------------
