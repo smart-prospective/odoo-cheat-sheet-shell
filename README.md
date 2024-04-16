@@ -182,7 +182,7 @@ on line 190 : remove the "isAttachmentBoxVisibleInitially", the section should l
 on line 100 : replace the values of "isAttachmentBoxOpened", the value should be set to "true"
 
 -------------
-To remove the "Généré par Odoo" expression from mails, you should start by search for "<!-- POWERED BY -->" expression in your odoo code, sort on the .xml files, you should have all the files that will need to be changed on the platform.
+To remove the "Généré par Odoo" expression from mails, you should start by search for "`<!-- POWERED BY -->`" expression in your odoo code, sort on the .xml files, you should have all the files that will need to be changed on the platform.
 Open Odoo, than open "Vues" and "Email Templates" accessible from "Technical":
 You should now start matching each reference from the code to it's version on the server, here is an example :
 
@@ -211,9 +211,9 @@ You should now start matching each reference from the code to it's version on th
 </td></tr>
 ```
 In this example, the file is located in "data" sub directory, and the "model" is a "mail.template", so we have to find it in email templates and edit it.
-If instead you find the subdirectory to have views, and instead of model you only have "<template id="xxxxxx" name="xxxxx">" than you will need to search in vues using the "name" to find the view.
+If instead you find the subdirectory to have views, and instead of model you only have "`<template id="xxxxxx" name="xxxxx">`" than you will need to search in vues using the "name" to find the view.
 
-And now remove the section starting by <!-- POWERED BY --> to "</td></tr>", sometimes you only need to remove only line of xml, each case is different.
+And now remove the section starting by "`<!-- POWERED BY -->`" to "`</td></tr>`", sometimes you only need to remove only line of xml, each case is different.
 
 Server Actions
 --------------
