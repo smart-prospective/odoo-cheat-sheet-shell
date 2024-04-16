@@ -170,9 +170,16 @@ action = {
     'target': 'new',
     'url': record_url,
 }
-```
-To fix the bug of messages not loading, caused by a "Record missing or deleted", create the following action in the Message model (mail.message) :
+
+Server Actions
+--------------
+The following actions solves various problems via code (some are linked to Contextual Action / Some are linked to Automations)
+
+For the contextual: You need to select the instances (list view) and select in the "action" the 
+
+* When in the chat part of a recording, there is a bug of "messages not loading" in Odoo, when it's caused by a "Record missing or deleted" in a "mail.message", create the following server action in the model: "Message (mail.message)" (Contextual) :
 ```python
+# Fix by removing the author_id when not existing anymore in the mail.message
 for record in records:
     if record.author_id:
         partner_record = env['res.partner'].search([('id', '=', record.author_id.id)])
@@ -180,3 +187,5 @@ for record in records:
             # find similar partner
             record.write({'author_id':False})
 ```
+
+
