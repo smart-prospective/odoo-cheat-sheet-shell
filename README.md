@@ -169,7 +169,8 @@ action = {
     'type': 'ir.actions.act_url',
     'target': 'new',
     'url': record_url,
-}```
+}
+```
 
 Server Actions
 --------------
