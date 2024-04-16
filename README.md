@@ -233,3 +233,19 @@ for record in records:
 ```
 
 
+* To quickly link all the sale.order with the matching crm.lead, create the following server action in the model: "Bon de Commande (sale.order)" (Contextual) :
+```python
+for record in records:
+    # Here is a dict with the Sale.Order name ("sale.order.name") and the value is the CRM.Lead opportunity "crm.lead.name"
+    data = {
+        "D-2024-04-0380": "L'onglerie - SAINTES",
+        "D-2024-04-0378": "Pizzalif - LCD bord à bord",
+    }
+    if record.name in data and not record.opportunity_id:
+        lead = env["crm.lead"].search([("name", "=", data[record.name])])
+        if lead and len(lead) == 1:
+            record.write({"opportunity_id": lead[0].id})
+            log(f"Auto set the lead {lead[0].name} to the sale.order {record.name}")
+        else:
+            log(f"No Lead found for the sale.order {record.name}")
+```
