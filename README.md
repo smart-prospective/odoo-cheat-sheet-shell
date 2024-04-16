@@ -171,3 +171,12 @@ action = {
     'url': record_url,
 }
 ```
+To fix the bug of messages not loading, caused by a "Record missing or deleted", create the following action in the Message model (mail.message) :
+```python
+for record in records:
+    if record.author_id:
+        partner_record = env['res.partner'].search([('id', '=', record.author_id.id)])
+        if not partner_record:
+            # find similar partner
+            record.write({'author_id':False})
+```
