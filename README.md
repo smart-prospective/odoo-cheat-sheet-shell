@@ -172,6 +172,7 @@ action = {
 }
 ```
 -------------
+
 To enable the viewing of the files all the time from the messages section, the file "/odoo/odoo/addons/mail/static/src/core/web/chatter.js" has to be modified:
 on line 190 : remove the "isAttachmentBoxVisibleInitially", the section should look like this :
 ```javascript
@@ -179,6 +180,7 @@ on line 190 : remove the "isAttachmentBoxVisibleInitially", the section should l
 }
 ```
 on line 100 : replace the values of "isAttachmentBoxOpened", the value should be set to "true"
+
 -------------
 To remove the "Généré par Odoo" expression from mails, you should start by search for "<!-- POWERED BY -->" expression in your odoo code, sort on the .xml files, you should have all the files that will need to be changed on the platform.
 Open Odoo, than open "Vues" and "Email Templates" accessible from "Technical":
