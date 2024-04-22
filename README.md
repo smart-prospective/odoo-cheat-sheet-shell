@@ -29,6 +29,23 @@ To commit changes, use:
 env.cr.commit()
 ```
 
+To access to the Database in order to check the exact info save in the DB:
+Via Docker:
+```bash
+# Replace postgres-17-prod by the name of your container
+docker exec -it postgres-17-prod bash
+# Then once inside bash:
+psql -U odoo -d postgres
+# Then once inside psql (replace odoo-17 by your database name (can be seen in the database-manager url)
+\c odoo-17
+# Then any request (don't forget to replace the '.' in the model name by an '_' (e.g for a contact)
+SELECT * FROM res_partner WHERE id=2;
+# To Quit (psql)
+\q
+# To Quit (bash)
+exit
+```
+
 Quick Start in Shell
 --------------------
 ```python
