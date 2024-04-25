@@ -119,6 +119,11 @@ record.write({'category_id': [(4, tag.id)]})
 Remove Data
 -----------
 
+Remove an instance
+```python
+record.unlink()
+```
+
 Edit a M2M (many to many) by removing an instance from a M2M field such as Category
 ```python
 tag_name = "Client"
