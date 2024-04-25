@@ -143,6 +143,22 @@ More info about M2M
 (6, 0, [IDs])          replace the list of linked IDs (like using (5) then (4,ID) for each ID in the list of IDs)
 ```
 
+Archive Data
+-----------
+
+Archive an instance means set the field "active" to False
+```python
+record.write({'active': False})
+```
+
+Unarchive Data
+-----------
+
+Unarchive an instance means set the field "active" to True
+```python
+record.write({'active': True})
+```
+
 Usefull Method
 --------------
 
